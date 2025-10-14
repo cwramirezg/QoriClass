@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.google.dagger.hilt.android)
@@ -15,57 +15,22 @@ kotlin {
 }
 
 android {
-    namespace = "com.cwramirezg.qoriclass"
+    namespace = "com.cwramirezg.authentication"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.cwramirezg.qoriclass"
         minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
 
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-    signingConfigs {
-        getByName("debug") {
-            storeFile = file("D:\\android\\jks\\cwramirezg-debug")
-            storePassword = "cwramirezg"
-            keyAlias = "cwramirezg"
-            keyPassword = "cwramirezg"
-        }
-    }
     buildTypes {
-        debug {
-            isMinifyEnabled = false
-            isShrinkResources = false
-            signingConfigs.findByName("debug")?.let {
-                signingConfig = it
-            }
-        }
         release {
             isMinifyEnabled = false
-            isShrinkResources = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
-        }
-    }
-    flavorDimensions += "env"
-    productFlavors {
-        create("dev"){
-            dimension = "env"
-        }
-        create("qa"){
-            dimension = "env"
-        }
-        create("prod"){
-            dimension = "env"
         }
     }
     compileOptions {
@@ -83,7 +48,6 @@ android {
 
 dependencies {
 
-    implementation(project(":authentication"))
     implementation(project(":core"))
 
     implementation(libs.androidx.core.ktx)
@@ -105,7 +69,13 @@ dependencies {
 
     implementation(platform(libs.google.firebase.bom))
     implementation(libs.google.firebase.analytics)
+    implementation(libs.google.firebase.auth)
     implementation(libs.google.firebase.firestore)
+
+    implementation(libs.google.play.services.auth)
+    implementation(libs.google.googleid)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
 
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)

@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "QoriClass"
 include(":app")
+include(":authentication")
+include(":core")

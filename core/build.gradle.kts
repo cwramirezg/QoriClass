@@ -1,11 +1,11 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.google.dagger.hilt.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.jetbrains.kotlin.compose)
-    alias(libs.plugins.google.gms.services)
+   // alias(libs.plugins.google.gms.services)
 }
 
 kotlin {
@@ -15,57 +15,23 @@ kotlin {
 }
 
 android {
-    namespace = "com.cwramirezg.qoriclass"
+    namespace = "com.cwramirezg.core"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.cwramirezg.qoriclass"
         minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
 
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-    signingConfigs {
-        getByName("debug") {
-            storeFile = file("D:\\android\\jks\\cwramirezg-debug")
-            storePassword = "cwramirezg"
-            keyAlias = "cwramirezg"
-            keyPassword = "cwramirezg"
-        }
-    }
     buildTypes {
-        debug {
-            isMinifyEnabled = false
-            isShrinkResources = false
-            signingConfigs.findByName("debug")?.let {
-                signingConfig = it
-            }
-        }
         release {
             isMinifyEnabled = false
-            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-        }
-    }
-    flavorDimensions += "env"
-    productFlavors {
-        create("dev"){
-            dimension = "env"
-        }
-        create("qa"){
-            dimension = "env"
-        }
-        create("prod"){
-            dimension = "env"
         }
     }
     compileOptions {
@@ -75,16 +41,9 @@ android {
     buildFeatures {
         compose = true
     }
-    composeCompiler {
-        reportsDestination = file("build/outputs/compose_reports")
-        metricsDestination = file("build/outputs/compose_metrics")
-    }
 }
 
 dependencies {
-
-    implementation(project(":authentication"))
-    implementation(project(":core"))
 
     implementation(libs.androidx.core.ktx)
 
@@ -103,9 +62,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    implementation(platform(libs.google.firebase.bom))
-    implementation(libs.google.firebase.analytics)
-    implementation(libs.google.firebase.firestore)
+//    implementation(platform(libs.google.firebase.bom))
+//    implementation(libs.google.firebase.analytics)
+//    implementation(libs.google.firebase.firestore)
 
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
