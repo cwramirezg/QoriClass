@@ -1,7 +1,5 @@
 package com.cwramirezg.authentication.presentation.ui.screens
 
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,23 +21,25 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.credentials.CredentialManager
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.cwramirezg.authentication.R
 import com.cwramirezg.authentication.presentation.pojos.LoginEvent
 import com.cwramirezg.authentication.presentation.pojos.LoginState
+import com.cwramirezg.authentication.presentation.utils.signInWithGoogle
 import com.cwramirezg.authentication.presentation.viewmodel.LoginViewModel
 import com.cwramirezg.core.presentation.base.BaseScreen
 import com.cwramirezg.core.presentation.components.DefaultErrorContent
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @Composable
@@ -49,31 +49,22 @@ fun LoginScreen(
     onNavigateToRegister: () -> Unit
 ) {
     val context = LocalContext.current
-
+    val coroutineScope = rememberCoroutineScope()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-        onResult = { result ->
-            try {
-                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                val account = task.getResult(ApiException::class.java)
-                account.idToken?.let { idToken ->
-                    viewModel.onEvent(LoginEvent.LoginWithGoogle(idToken))
-                }
-            } catch (e: ApiException) {
-                Timber.e(e, "Error al iniciar sesión con Google")
-            }
-        }
-    )
+    val credentialManager = remember { CredentialManager.create(context) }
 
     BaseScreen(
-        uiState = uiState, errorContent = { message, retry ->
+        uiState = uiState,
+        errorContent = { message, retry ->
             DefaultErrorContent(
-                message = message, onRetry = {
+                message = message,
+                onRetry = {
                     viewModel.onEvent(LoginEvent.OnRetry)
-                })
-        }) { state ->
+                }
+            )
+        }
+    ) { state ->
         LaunchedEffect(state.success) {
             Timber.d("Success: ${state.success}")
             if (state.success) {
@@ -85,12 +76,13 @@ fun LoginScreen(
             onEvent = { viewModel.onEvent(it) },
             onNavigateToRegister = onNavigateToRegister,
             onLauncher = {
-                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken("252794970771-gv8kb18gd9ib1ud2oenmjhv79uik6fpu.apps.googleusercontent.com")
-                    .requestEmail()
-                    .build()
-                val googleSignInClient = GoogleSignIn.getClient(context, gso)
-                launcher.launch(googleSignInClient.signInIntent)
+                coroutineScope.launch {
+                    signInWithGoogle(
+                        credentialManager = credentialManager,
+                        context = context,
+                        onLoginWithGoogle = { viewModel.onEvent(LoginEvent.LoginWithGoogle(it)) }
+                    )
+                }
             }
         )
     }
