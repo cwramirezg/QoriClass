@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.google.dagger.hilt.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.jetbrains.kotlin.compose)
-    alias(libs.plugins.google.gms.services)
 }
 
 kotlin {
@@ -13,9 +12,8 @@ kotlin {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
-
 android {
-    namespace = "com.cwramirezg.authentication"
+    namespace = "com.cwramirezg.design"
     compileSdk = 36
 
     defaultConfig {
@@ -29,7 +27,8 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
@@ -40,17 +39,9 @@ android {
     buildFeatures {
         compose = true
     }
-    composeCompiler {
-        reportsDestination = file("build/outputs/compose_reports")
-        metricsDestination = file("build/outputs/compose_metrics")
-    }
 }
 
 dependencies {
-
-    implementation(project(":core"))
-    implementation(project(":design"))
-
     implementation(libs.androidx.core.ktx)
 
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -68,15 +59,9 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    implementation(platform(libs.google.firebase.bom))
-    implementation(libs.google.firebase.analytics)
-    implementation(libs.google.firebase.auth)
-    implementation(libs.google.firebase.firestore)
-
-    implementation(libs.google.play.services.auth)
-    implementation(libs.google.googleid)
-    implementation(libs.androidx.credentials)
-    implementation(libs.androidx.credentials.play.services.auth)
+//    implementation(platform(libs.google.firebase.bom))
+//    implementation(libs.google.firebase.analytics)
+//    implementation(libs.google.firebase.firestore)
 
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)

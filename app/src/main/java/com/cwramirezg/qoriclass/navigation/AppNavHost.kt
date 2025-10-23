@@ -1,12 +1,12 @@
 package com.cwramirezg.qoriclass.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.cwramirezg.authentication.presentation.ui.screens.LoginScreen
 import com.cwramirezg.authentication.presentation.ui.screens.RegisterScreen
+import com.cwramirezg.home.presentation.ui.screens.HomeScreen
 import timber.log.Timber
 
 @Composable
@@ -52,7 +52,7 @@ fun AppNavHost(
 
         composable<NavigationDestination.Home> {
             Timber.d("Renderizando HomeScreen")
-            Text(text = "Home")
+            HomeScreen()
         }
     }
 }

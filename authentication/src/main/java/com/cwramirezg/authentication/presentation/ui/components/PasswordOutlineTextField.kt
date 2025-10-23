@@ -13,7 +13,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import com.cwramirezg.authentication.R
+import com.cwramirezg.design.R
 import java.util.regex.Pattern
 
 @Composable
@@ -43,12 +43,12 @@ fun PasswordOutlineTextField(
         trailingIcon = {
             val (icon, iconColor) = if (showPassword.value) {
                 Pair(
-                    painterResource(id = R.drawable.baseline_visibility_24),
+                    painterResource(id = R.drawable.visibility_24),
                     colorResource(id = R.color.black)
                 )
             } else {
                 Pair(
-                    painterResource(id = R.drawable.baseline_visibility_off_24),
+                    painterResource(id = R.drawable.visibility_off_24),
                     colorResource(id = R.color.black)
                 )
             }

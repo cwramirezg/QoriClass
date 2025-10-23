@@ -28,17 +28,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.credentials.CredentialManager
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.cwramirezg.authentication.R
 import com.cwramirezg.authentication.presentation.pojos.LoginEvent
 import com.cwramirezg.authentication.presentation.pojos.LoginState
 import com.cwramirezg.authentication.presentation.utils.signInWithGoogle
 import com.cwramirezg.authentication.presentation.viewmodel.LoginViewModel
 import com.cwramirezg.core.presentation.base.BaseScreen
 import com.cwramirezg.core.presentation.components.DefaultErrorContent
+import com.cwramirezg.design.R
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -101,6 +102,12 @@ fun LoginContent(
             .padding(16.dp), contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                contentDescription = "Logo",
+                modifier = Modifier.size(128.dp),
+                tint = Color.Unspecified
+            )
             Text("Iniciar Sesión", style = MaterialTheme.typography.headlineMedium)
             Spacer(modifier = Modifier.height(32.dp))
             OutlinedTextField(
@@ -142,4 +149,15 @@ fun LoginContent(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun LoginContentPreview() {
+    LoginContent(
+        state = LoginState(),
+        onEvent = {},
+        onNavigateToRegister = {},
+        onLauncher = {}
+    )
 }
