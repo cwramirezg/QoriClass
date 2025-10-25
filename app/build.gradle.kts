@@ -22,8 +22,8 @@ android {
         applicationId = "com.cwramirezg.qoriclass"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -48,8 +48,8 @@ android {
             }
         }
         release {
-            isMinifyEnabled = false
-            isShrinkResources = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -58,13 +58,13 @@ android {
     }
     flavorDimensions += "env"
     productFlavors {
-        create("dev"){
+        create("dev") {
             dimension = "env"
         }
-        create("qa"){
+        create("qa") {
             dimension = "env"
         }
-        create("prod"){
+        create("prod") {
             dimension = "env"
         }
     }
