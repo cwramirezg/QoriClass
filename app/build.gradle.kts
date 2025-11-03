@@ -20,7 +20,7 @@ android {
 
     defaultConfig {
         applicationId = "com.cwramirezg.qoriclass"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 3
         versionName = "1.0.0"
@@ -83,54 +83,56 @@ android {
 
 dependencies {
 
-    implementation(project(":authentication"))
-    implementation(project(":home"))
     implementation(project(":core"))
     implementation(project(":design"))
+    implementation(project(":authentication"))
+    implementation(project(":home"))
 
+    // ===== AndroidX Core =====
     implementation(libs.androidx.core.ktx)
-
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.androidx.hilt.compiler)
-    implementation(libs.androidx.hilt.work)
-
+    //===== Compose =====
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material.icons)
     implementation(libs.androidx.material3)
-
-    implementation(platform(libs.google.firebase.bom))
-    implementation(libs.google.firebase.analytics)
-    implementation(libs.google.firebase.firestore)
-
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    //===== Dependency Injection (Hilt) =====
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
+    //===== Persistence =====
+    implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.runtime)
-
     implementation(libs.androidx.datastore.preferences)
-
-    implementation(libs.androidx.work)
-
-    implementation(libs.androidx.paging.runtime)
-    implementation(libs.androidx.paging.compose)
-
+    //===== Networking =====
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.kotlinx.serialization)
     implementation(libs.logging.interceptor)
-
-    implementation(libs.coil.compose)
-
+    //===== Serialization =====
     implementation(libs.kotlinx.serialization.json)
+    //===== Image Loading =====
+    implementation(libs.coil.compose)
+    //===== Pagination =====
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
+    //===== Background Processing =====
+    implementation(libs.androidx.work)
+    //===== Firebase =====
+    implementation(platform(libs.google.firebase.bom))
+    implementation(libs.google.firebase.analytics)
+    implementation(libs.google.firebase.auth)
+    implementation(libs.google.firebase.firestore)
 
+    //===== Logging =====
     implementation(libs.timber)
-
-    implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

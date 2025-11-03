@@ -72,6 +72,16 @@ fun LoginScreen(
                 onLoginSuccess()
             }
         }
+        LaunchedEffect(Unit) {
+            signInWithGoogle(
+                credentialManager = credentialManager,
+                context = context,
+                webClientId = state.webClientId,
+                filterByAuthorizedAccounts = true,
+                onLoginWithGoogle = { viewModel.onEvent(LoginEvent.LoginWithGoogle(it)) }
+            )
+        }
+
         LoginContent(
             state = state,
             onEvent = { viewModel.onEvent(it) },
@@ -81,6 +91,8 @@ fun LoginScreen(
                     signInWithGoogle(
                         credentialManager = credentialManager,
                         context = context,
+                        webClientId = state.webClientId,
+                        filterByAuthorizedAccounts = false,
                         onLoginWithGoogle = { viewModel.onEvent(LoginEvent.LoginWithGoogle(it)) }
                     )
                 }
@@ -133,7 +145,8 @@ fun LoginContent(
             HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedButton(
-                onClick = { onLauncher() }, modifier = Modifier.fillMaxWidth()
+                onClick = { onLauncher() },
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_google_logo),
@@ -155,7 +168,7 @@ fun LoginContent(
 @Composable
 fun LoginContentPreview() {
     LoginContent(
-        state = LoginState(),
+        state = LoginState(webClientId = "asd"),
         onEvent = {},
         onNavigateToRegister = {},
         onLauncher = {}

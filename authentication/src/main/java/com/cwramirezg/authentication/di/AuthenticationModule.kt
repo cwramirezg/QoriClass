@@ -6,6 +6,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -19,3 +20,7 @@ abstract class AuthenticationModule {
     ): AuthenticationRepository
 
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class WebClientId

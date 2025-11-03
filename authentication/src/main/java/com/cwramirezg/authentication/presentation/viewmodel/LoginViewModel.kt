@@ -1,5 +1,6 @@
 package com.cwramirezg.authentication.presentation.viewmodel
 
+import com.cwramirezg.authentication.di.WebClientId
 import com.cwramirezg.authentication.domain.model.Login
 import com.cwramirezg.authentication.domain.usecase.LoginUseCase
 import com.cwramirezg.authentication.domain.usecase.LoginWithGoogleUseCase
@@ -16,11 +17,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    @WebClientId private val webClientId: String,
     private val loginUseCase: LoginUseCase,
     private val loginWithGoogleUseCase: LoginWithGoogleUseCase
 ) : BaseViewModel() {
 
-    private var state = LoginState()
+    private var state = LoginState(webClientId = webClientId)
 
     private val _uiState = MutableStateFlow<UiState<LoginState>>(UiState.Loaded(state))
     val uiState = _uiState.asStateFlow()

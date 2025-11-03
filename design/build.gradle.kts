@@ -1,8 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.google.devtools.ksp)
-    alias(libs.plugins.google.dagger.hilt.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.jetbrains.kotlin.compose)
 }
@@ -17,7 +15,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -42,49 +40,29 @@ android {
 }
 
 dependencies {
+    // ===== AndroidX Core =====
     implementation(libs.androidx.core.ktx)
-
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
-    ksp(libs.androidx.hilt.compiler)
-    implementation(libs.androidx.hilt.work)
-
+    //===== Compose =====
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material.icons)
     implementation(libs.androidx.material3)
-
-//    implementation(platform(libs.google.firebase.bom))
-//    implementation(libs.google.firebase.analytics)
-//    implementation(libs.google.firebase.firestore)
-
-    implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.runtime)
-
-    implementation(libs.androidx.datastore.preferences)
-
-    implementation(libs.androidx.work)
-
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+    //===== Serialization =====
+    implementation(libs.kotlinx.serialization.json)
+    //===== Image Loading =====
+    implementation(libs.coil.compose)
+    //===== Pagination =====
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
 
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.kotlinx.serialization)
-    implementation(libs.logging.interceptor)
-
-    implementation(libs.coil.compose)
-
-    implementation(libs.kotlinx.serialization.json)
-
+    //===== Logging =====
     implementation(libs.timber)
-
-    implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)

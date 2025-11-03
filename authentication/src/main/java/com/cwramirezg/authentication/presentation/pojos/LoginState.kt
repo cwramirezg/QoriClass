@@ -4,4 +4,5 @@ data class LoginState(
     val email: String = "",
     val password: String = "",
     val success: Boolean = false,
+    val webClientId: String,
 )
