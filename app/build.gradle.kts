@@ -86,7 +86,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":design"))
     implementation(project(":authentication"))
-    implementation(project(":home"))
+    implementation(project(":features:home"))
 
     // ===== AndroidX Core =====
     implementation(libs.androidx.core.ktx)

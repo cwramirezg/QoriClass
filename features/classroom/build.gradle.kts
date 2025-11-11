@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.google.dagger.hilt.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.jetbrains.kotlin.compose)
 }
@@ -12,7 +14,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.cwramirezg.design"
+    namespace = "com.cwramirezg.classroom"
     compileSdk = 36
 
     defaultConfig {
@@ -38,13 +40,21 @@ android {
     buildFeatures {
         compose = true
     }
+    composeCompiler {
+        reportsDestination = file("build/outputs/compose_reports")
+        metricsDestination = file("build/outputs/compose_metrics")
+    }
+
 }
 
 dependencies {
-    // ===== AndroidX Core =====
+    implementation(project(":core"))
+    implementation(project(":design"))
+
+// ===== AndroidX Core =====
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    //===== Compose =====
+//===== Compose =====
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -54,15 +64,37 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-    //===== Serialization =====
+//===== Dependency Injection (Hilt) =====
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
+//===== Persistence =====
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.datastore.preferences)
+//===== Networking =====
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.kotlinx.serialization)
+    implementation(libs.logging.interceptor)
+//===== Serialization =====
     implementation(libs.kotlinx.serialization.json)
-    //===== Image Loading =====
+//===== Image Loading =====
     implementation(libs.coil.compose)
-    //===== Pagination =====
+//===== Pagination =====
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
+//===== Background Processing =====
+    implementation(libs.androidx.work)
+//===== Firebase =====
+    implementation(platform(libs.google.firebase.bom))
+    implementation(libs.google.firebase.analytics)
+    implementation(libs.google.firebase.auth)
+    implementation(libs.google.firebase.firestore)
 
-    //===== Logging =====
+//===== Logging =====
     implementation(libs.timber)
 
     testImplementation(libs.junit)

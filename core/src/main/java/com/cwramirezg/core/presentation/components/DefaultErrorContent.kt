@@ -48,7 +48,7 @@ fun DefaultErrorContent(
         )
 
         onRetry?.let {
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = it,
                 colors = ButtonDefaults.buttonColors(
@@ -58,7 +58,7 @@ fun DefaultErrorContent(
                 Icon(
                     painterResource(R.drawable.baseline_refresh_24),
                     contentDescription = null,
-                    modifier = Modifier.size(18.dp)
+                    modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text("Reintentar")
@@ -69,9 +69,9 @@ fun DefaultErrorContent(
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultErrorContentPreview() {
+private fun DefaultErrorContentPreview() {
     DefaultErrorContent(
         message = "Error al cargar los datos",
-        onRetry = null
+        onRetry = {}
     )
 }

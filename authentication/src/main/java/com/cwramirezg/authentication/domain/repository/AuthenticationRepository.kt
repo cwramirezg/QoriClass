@@ -7,7 +7,7 @@ import com.google.firebase.auth.AuthResult
 import kotlinx.coroutines.flow.Flow
 
 interface AuthenticationRepository {
-    suspend fun login(login: Login): Flow<RepositoryResult<AuthResult>>
-    suspend fun register(register: Register): Flow<RepositoryResult<AuthResult>>
-    suspend fun googleSignIn(idToken: String): Flow<RepositoryResult<AuthResult>>
+    fun login(login: Login): Flow<RepositoryResult<AuthResult>>
+    fun register(register: Register): Flow<RepositoryResult<AuthResult>>
+    fun googleSignIn(idToken: String): Flow<RepositoryResult<AuthResult>>
 }

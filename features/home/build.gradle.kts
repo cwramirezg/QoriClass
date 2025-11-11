@@ -12,6 +12,7 @@ kotlin {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
     }
 }
+
 android {
     namespace = "com.cwramirezg.home"
     compileSdk = 36
@@ -49,6 +50,7 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":design"))
+    implementation(project(":features:classroom"))
 
     // ===== AndroidX Core =====
     implementation(libs.androidx.core.ktx)

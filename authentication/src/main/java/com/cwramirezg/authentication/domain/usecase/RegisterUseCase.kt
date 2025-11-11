@@ -13,7 +13,7 @@ import javax.inject.Inject
 class RegisterUseCase @Inject constructor(
     private val repository: AuthenticationRepository
 ) : BaseUseCase<Register, AuthResult>() {
-    override suspend fun execute(parameter: Register): Flow<DomainResult<AuthResult>> {
+    override fun execute(parameter: Register): Flow<DomainResult<AuthResult>> {
         return repository.register(parameter).map { result ->
             when (result) {
                 is RepositoryResult.Success -> {

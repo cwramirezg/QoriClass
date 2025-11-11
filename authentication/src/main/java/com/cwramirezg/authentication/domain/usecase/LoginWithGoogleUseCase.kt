@@ -12,7 +12,7 @@ import javax.inject.Inject
 class LoginWithGoogleUseCase @Inject constructor(
     private val repository: AuthenticationRepository
 ) : BaseUseCase<String, AuthResult>() {
-    override suspend fun execute(parameter: String): Flow<DomainResult<AuthResult>> {
+    override fun execute(parameter: String): Flow<DomainResult<AuthResult>> {
         return repository.googleSignIn(parameter).map { result ->
             when (result) {
                 is RepositoryResult.Success -> {

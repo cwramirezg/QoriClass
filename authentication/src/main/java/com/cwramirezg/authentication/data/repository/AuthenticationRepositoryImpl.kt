@@ -13,15 +13,15 @@ import javax.inject.Inject
 class AuthenticationRepositoryImpl @Inject constructor(
     private val authenticationGmsDatasource: AuthenticationGmsDatasource
 ) : AuthenticationRepository {
-    override suspend fun login(login: Login): Flow<RepositoryResult<AuthResult>> {
+    override fun login(login: Login): Flow<RepositoryResult<AuthResult>> {
         return authenticationGmsDatasource.login(login.email, login.password)
     }
 
-    override suspend fun register(register: Register): Flow<RepositoryResult<AuthResult>> {
+    override fun register(register: Register): Flow<RepositoryResult<AuthResult>> {
         return authenticationGmsDatasource.register(register.email, register.password)
     }
 
-    override suspend fun googleSignIn(idToken: String): Flow<RepositoryResult<AuthResult>> {
+    override fun googleSignIn(idToken: String): Flow<RepositoryResult<AuthResult>> {
         return authenticationGmsDatasource.googleSignIn(idToken)
     }
 

@@ -22,9 +22,9 @@ fun DefaultLoadingContent() {
         CircularProgressIndicator(
             color = MaterialTheme.colorScheme.primary
         )
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Cargando...",
+            text = "Cargando",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
@@ -33,6 +33,6 @@ fun DefaultLoadingContent() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultLoadingContentPreview() {
+private fun DefaultLoadingContentPreview() {
     DefaultLoadingContent()
 }

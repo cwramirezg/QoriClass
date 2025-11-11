@@ -9,17 +9,17 @@ import kotlinx.coroutines.flow.flowOn
 abstract class BaseUseCase<in P, R>(
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend operator fun invoke(parameter: P): Flow<DomainResult<R>> =
+    operator fun invoke(parameter: P): Flow<DomainResult<R>> =
         execute(parameter).flowOn(coroutineDispatcher)
 
-    protected abstract suspend fun execute(parameter: P): Flow<DomainResult<R>>
+    protected abstract fun execute(parameter: P): Flow<DomainResult<R>>
 }
 
 abstract class BaseUseCaseNoParams<R>(
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-    suspend operator fun invoke(): Flow<DomainResult<R>> =
+    operator fun invoke(): Flow<DomainResult<R>> =
         execute().flowOn(coroutineDispatcher)
 
-    protected abstract suspend fun execute(): Flow<DomainResult<R>>
+    protected abstract fun execute(): Flow<DomainResult<R>>
 }
