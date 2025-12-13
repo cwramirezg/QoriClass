@@ -48,7 +48,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:presentation"))
     implementation(project(":design"))
 
 // ===== AndroidX Core =====

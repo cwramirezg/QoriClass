@@ -2,8 +2,6 @@
 
 package com.cwramirezg.home.presentation.ui.screens
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -630,11 +628,8 @@ private fun obtenerFuncionesSecundarias() = listOf(
     )
 )
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun PreviewHomeScreenUnderConstruction() {
-    MaterialTheme {
-        HomeScreen()
-    }
+    HomeScreen()
 }

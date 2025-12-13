@@ -7,7 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.rememberNavController
-import com.cwramirezg.core.navigation.AuthenticationNavGraph
 import com.cwramirezg.qoriclass.navigation.AppNavHost
 import com.cwramirezg.qoriclass.ui.theme.QoriClassTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,14 +34,9 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 AppNavHost(
-                    navController = navController,
-                    startDestination = getStartDestination()
+                    navController = navController
                 )
             }
         }
     }
-}
-
-private fun getStartDestination(): Any {
-    return AuthenticationNavGraph
 }

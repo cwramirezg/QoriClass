@@ -1,10 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.google.devtools.ksp)
-    alias(libs.plugins.google.dagger.hilt.android)
     alias(libs.plugins.jetbrains.kotlin.serialization)
     alias(libs.plugins.jetbrains.kotlin.compose)
+    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.google.dagger.hilt.android)
     alias(libs.plugins.google.gms.services)
 }
 
@@ -16,11 +16,14 @@ kotlin {
 
 android {
     namespace = "com.cwramirezg.qoriclass"
-    compileSdk = 36
-
+    compileSdk {
+        version = release(36)
+    }
     defaultConfig {
         applicationId = "com.cwramirezg.qoriclass"
-        minSdk = 26
+        minSdk {
+            version = release(26)
+        }
         targetSdk = 36
         versionCode = 3
         versionName = "1.0.0"
@@ -82,12 +85,13 @@ android {
 }
 
 dependencies {
-
-    implementation(project(":core"))
+    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:presentation"))
     implementation(project(":design"))
-    implementation(project(":authentication"))
+    implementation(project(":features:authentication"))
+    implementation(project(":features:classroom"))
     implementation(project(":features:home"))
-
     // ===== AndroidX Core =====
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -130,7 +134,6 @@ dependencies {
     implementation(libs.google.firebase.analytics)
     implementation(libs.google.firebase.auth)
     implementation(libs.google.firebase.firestore)
-
     //===== Logging =====
     implementation(libs.timber)
 

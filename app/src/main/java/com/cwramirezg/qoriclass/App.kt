@@ -8,6 +8,6 @@ import timber.log.Timber
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        Timber.Forest.plant(Timber.DebugTree())
+        Timber.plant(Timber.DebugTree())
     }
 }
