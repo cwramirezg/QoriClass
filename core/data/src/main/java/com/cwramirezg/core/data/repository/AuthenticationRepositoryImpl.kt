@@ -75,4 +75,8 @@ class AuthenticationRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun isUserLoggedIn(): Boolean {
+        return authenticationGmsDatasource.isUserLoggedIn()
+    }
+
 }

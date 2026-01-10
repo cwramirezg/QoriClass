@@ -10,4 +10,5 @@ interface AuthenticationRepository {
     fun login(login: Login): Flow<DomainResult<Auth>>
     fun register(register: Register): Flow<DomainResult<Auth>>
     fun googleSignIn(idToken: String): Flow<DomainResult<Auth>>
+    fun isUserLoggedIn(): Boolean
 }

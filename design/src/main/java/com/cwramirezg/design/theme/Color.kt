@@ -1,4 +1,4 @@
-package com.cwramirezg.qoriclass.ui.theme
+package com.cwramirezg.design.theme
 
 import androidx.compose.ui.graphics.Color
 

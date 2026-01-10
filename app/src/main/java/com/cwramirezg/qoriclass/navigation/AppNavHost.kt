@@ -7,6 +7,8 @@ import com.cwramirezg.authentication.navigation.AuthenticationNavGraph
 import com.cwramirezg.authentication.navigation.authenticationNavGraph
 import com.cwramirezg.home.navigation.HomeNavGraph
 import com.cwramirezg.home.navigation.homeNavGraph
+import com.cwramirezg.splash.navigation.SplashNavGraph
+import com.cwramirezg.splash.navigation.splashNavGraph
 
 @Composable
 fun AppNavHost(
@@ -14,8 +16,24 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = AuthenticationNavGraph
+        startDestination = SplashNavGraph
     ) {
+        splashNavGraph(
+            onNavigateToLogin = {
+                navController.navigate(AuthenticationNavGraph) {
+                    popUpTo(SplashNavGraph) {
+                        inclusive = true
+                    }
+                }
+            },
+            onNavigateToHome = {
+                navController.navigate(HomeNavGraph) {
+                    popUpTo(SplashNavGraph) {
+                        inclusive = true
+                    }
+                }
+            }
+        )
         authenticationNavGraph(
             navController = navController,
             onNavHome = {

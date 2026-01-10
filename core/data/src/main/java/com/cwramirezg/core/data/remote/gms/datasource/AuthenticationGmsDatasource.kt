@@ -19,7 +19,7 @@ class AuthenticationGmsDatasource @Inject constructor(
                 val result = auth.signInWithEmailAndPassword(email, password).await()
                 emit(RepositoryResult.Success(result))
             } catch (e: Exception) {
-                emit(RepositoryResult.Error(e.message ?: "Ocurrió un error", e))
+                emit(RepositoryResult.Error(e.message ?: DEFAULT_ERROR_MESSAGE, e))
             }
         }
 
@@ -28,7 +28,7 @@ class AuthenticationGmsDatasource @Inject constructor(
             val result = auth.createUserWithEmailAndPassword(email, password).await()
             emit(RepositoryResult.Success(result))
         } catch (e: Exception) {
-            emit(RepositoryResult.Error(e.message ?: "Ocurrió un error", e))
+            emit(RepositoryResult.Error(e.message ?: DEFAULT_ERROR_MESSAGE, e))
         }
     }
 
@@ -38,7 +38,15 @@ class AuthenticationGmsDatasource @Inject constructor(
             val result = auth.signInWithCredential(credential).await()
             emit(RepositoryResult.Success(result))
         } catch (e: Exception) {
-            emit(RepositoryResult.Error(e.message ?: "Ocurrió un error", e))
+            emit(RepositoryResult.Error(e.message ?: DEFAULT_ERROR_MESSAGE, e))
         }
+    }
+
+    fun isUserLoggedIn(): Boolean {
+        return auth.currentUser != null
+    }
+
+    companion object {
+        private const val DEFAULT_ERROR_MESSAGE = "Ocurrió un error"
     }
 }
