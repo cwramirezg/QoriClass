@@ -85,14 +85,15 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
-    implementation(project(":core:domain"))
+    implementation(project(":core:designsystem"))
     implementation(project(":core:presentation"))
-    implementation(project(":design"))
     implementation(project(":features:authentication"))
     implementation(project(":features:classroom"))
     implementation(project(":features:home"))
     implementation(project(":features:splash"))
+    implementation(project(":layers:data"))
+    implementation(project(":layers:domain"))
+
     // ===== AndroidX Core =====
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

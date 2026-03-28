@@ -2,9 +2,9 @@ package com.cwramirezg.splash.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cwramirezg.core.domain.usecase.app.AppUpdateStatus
-import com.cwramirezg.core.domain.usecase.app.CheckAppUpdateUseCase
-import com.cwramirezg.core.domain.usecase.authentication.IsUserLoggedInUseCase
+import com.cwramirezg.qoriclass.layers.domain.usecase.app.AppUpdateStatus
+import com.cwramirezg.qoriclass.layers.domain.usecase.app.CheckAppUpdateUseCase
+import com.cwramirezg.qoriclass.layers.domain.usecase.authentication.IsUserLoggedInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

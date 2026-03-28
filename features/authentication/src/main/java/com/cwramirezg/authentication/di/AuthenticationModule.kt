@@ -1,7 +1,7 @@
 package com.cwramirezg.authentication.di
 
-import com.cwramirezg.core.data.repository.AuthenticationRepositoryImpl
-import com.cwramirezg.core.domain.repository.AuthenticationRepository
+import com.cwramirezg.qoriclass.layers.data.repository.AuthenticationRepositoryImpl
+import com.cwramirezg.qoriclass.layers.domain.repository.AuthenticationRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -50,10 +50,9 @@ android {
 }
 
 dependencies {
-
-    implementation(project(":core:data"))
-    implementation(project(":core:domain"))
-    implementation(project(":design"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":layers:data"))
+    implementation(project(":layers:domain"))
 
     // ===== AndroidX Core =====
     implementation(libs.androidx.core.ktx)

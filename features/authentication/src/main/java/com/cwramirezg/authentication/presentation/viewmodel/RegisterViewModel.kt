@@ -1,12 +1,12 @@
 package com.cwramirezg.authentication.presentation.viewmodel
 
-import com.cwramirezg.core.domain.usecase.authentication.RegisterUseCase
 import com.cwramirezg.authentication.presentation.pojos.RegisterEvent
 import com.cwramirezg.authentication.presentation.pojos.RegisterState
-import com.cwramirezg.core.domain.model.Register
-import com.cwramirezg.core.domain.result.DomainResult
 import com.cwramirezg.presentation.base.BaseViewModel
 import com.cwramirezg.presentation.state.UiState
+import com.cwramirezg.qoriclass.layers.domain.model.Register
+import com.cwramirezg.qoriclass.layers.domain.result.DomainResult
+import com.cwramirezg.qoriclass.layers.domain.usecase.authentication.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

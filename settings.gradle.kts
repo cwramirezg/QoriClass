@@ -5,9 +5,13 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+    id(
+        "org.gradle.toolchains.foojay-resolver-convention"
+    ) version "1.0.0"
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -17,12 +21,14 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "QoriClass"
+
 include(":app")
-include(":core:data")
-include(":core:domain")
+include(":core:common")
+include(":core:designsystem")
 include(":core:presentation")
-include(":design")
 include(":features:authentication")
 include(":features:classroom")
 include(":features:home")
 include(":features:splash")
+include(":layers:data")
+include(":layers:domain")
